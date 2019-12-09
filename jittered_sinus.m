@@ -1,4 +1,4 @@
-function s = jitterd_sinus(f,d,fs,as,aj,fj)
+function [s,sj] = jitterd_sinus(as,f,d,fs,aj,fj)
     % f: tone frequency
     % d: tone duration
     % fs: sampling frequency
@@ -17,9 +17,10 @@ function s = jitterd_sinus(f,d,fs,as,aj,fj)
     sj = as*sin(2*pi*f*ts);
     S = 20*log10(abs(fft(s,N_FFT))*2/(N_FFT));
     SJ = 20*log10(abs(fft(sj,N_FFT))*2/(N_FFT));
-    hold on
+    hold on, grid on;
     plot((0:((length(S)-1)/2))/512*(fs),S(1:(length(S)/2)));    
-    if (aj~=0)
-        plot((0:((length(S)-1)/2))/512*(fs),SJ(1:(length(S)/2)));    
-    end
+    ylabel('Amplitude (dB)','Fontsize',14);
+    xlabel('Frequency (Hz)','Fontsize',14);        
+    plot((0:((length(S)-1)/2))/512*(fs),SJ(1:(length(S)/2)));        
+    legend({'Normal','Jittered'});
 end
