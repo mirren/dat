@@ -1,4 +1,4 @@
-function [s,sj] = jitterd_sinus(as,f,d,fs,aj,fj)
+function [s,sj] = jittered_sinus(as,f,d,fs,aj,fj)
     % f: tone frequency
     % d: tone duration
     % fs: sampling frequency
