@@ -17,7 +17,7 @@ function [s,sj] = jittered_sinus(as,f,d,fs,aj,fj)
     sj = as*sin(2*pi*f*ts);
     S = 20*log10(abs(fft(s,N_FFT))*2/(N_FFT));
     SJ = 20*log10(abs(fft(sj,N_FFT))*2/(N_FFT));
-    hold on, grid on;
+    figure,hold on, grid on;
     plot((0:((length(S)-1)/2))/512*(fs),S(1:(length(S)/2)));    
     ylabel('Amplitude (dB)','Fontsize',14);
     xlabel('Frequency (Hz)','Fontsize',14);        
