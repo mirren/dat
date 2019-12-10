@@ -1,4 +1,4 @@
-function dithering_demo()
+function [sq,sqast,sqd] = dithering_demo()
 
 as = 2*2/(2^16); fc = 200;
 k = 16; dur = 0.1; fs = 44100;
@@ -13,7 +13,7 @@ else
    fprintf(1,'Bits Required: %d\n', ast);
 end
 
-s = sinus(round(ast/2)*2/(2^16),fc,dur,fs);
+s = sinus(2/(2^16),fc,dur,fs);
 n = uniform_dither(length(s),k);
 sast = sinus(ast*2/(2^16),fc,dur,fs);
 sd = s + n';
@@ -36,8 +36,8 @@ legend({'Dithered','Normal'},'Fontsize',14);
 xlabel('Time','Fontsize',14);ylabel('Amplitude','Fontsize',14);
 subplot(3,1,3); hold on; grid on;
 title('Quantization Error (Frequency)');
-[px1,f1,pxxc1] = periodogram(sqd,'one-sided',512);
-[px2,f2,pxxc1] = periodogram(sq,'one-sided',512,'r');
+[px1,f1,pxxc1] = periodogram(sqd,'onesided',512);
+[px2,f2,pxxc1] = periodogram(sq,'onesided',512,'r');
 plot(f1,10*log10(px2),f1,10*log10(px1));
 
 1;
