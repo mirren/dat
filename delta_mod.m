@@ -9,7 +9,7 @@ d = 2*pi*as*(400/(u*fs));
 sd = zeros(length(su),1);
 xr = zeros(length(su),1);
 for n = 1:(length(su)-1)
-%      e(n) = su(n) - low_pass(sd(n-1),sd(n-2),0.5);
+
    e(n) = su(n) - xr(n);
     if e(n)>0 
         sd(n)=1;
@@ -31,7 +31,3 @@ xrd = xr(1:u:length(xr));
 1;
 end
 
-function y=low_pass(x,y_1,a)
-     y = y_1 + a*(x-y_1);
-%    y = y_1 + x;
-end
