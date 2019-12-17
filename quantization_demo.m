@@ -1,5 +1,10 @@
 function [s,sq,e] = quantization_demo(k)
+% function [s,sq,e] = quantization_demo(k)
 % k: number of bits
+% s:  original signal
+% sq: quantized signal 
+% e:  error signal
+
 N_FFT = 512;
 fs = 44100; as = 1; dur = 0.5; m = as;
 t = 0:(1/fs):dur;

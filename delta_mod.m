@@ -1,4 +1,9 @@
 function [xrd,s] = delta_mod(u)
+% function [xrd,s] = delta_mod(u)
+% implementation of a delta modulator
+% u: upsampling rate
+% xrd: reconstructed signal
+% s: original signal 
 
 % Generate Input Signals
 fs = 44100;as = 1; dur = 0.05;
@@ -7,7 +12,7 @@ s = sinus(as,440,dur,fs);
 % Upsample
 su = sinus(as,440,dur,u*fs);
 
-% Ideal Step
+% Using a higher than Ideal Step
 d = (1.5)*2*pi*as*(400/(u*fs));
 sd = zeros(length(su),1);
 xr = zeros(length(su),1);
@@ -16,14 +21,14 @@ a = 0.8; xr(1)=su(1);
 % Encoder
 for n = 1:(length(su)-1)
     % Calculate Error Signal
-    e(n) = su(n) - xr(n);
-    if e(n)>0 
+    delta(n) = su(n) - xr(n);
+    if delta(n)>0 
         sd(n)=d;
     else
         sd(n)=-d;
     end
     % Store Quantization Error
-    q(n) = e(n) - sd(n);
+    q(n) = delta(n) - sd(n);
     % Integrate (low-pass) to feed back
     xr(n+1) = one_pole_low_pass(sd(n),xr(n),-0.8);    
 end
