@@ -1,13 +1,14 @@
-function [s_sdm,q_sdm] = delta_sigma_mod(s,u)
+function [s_ds,q_ds] = delta_sigma_mod(s,u)
 % function [xrd,s] = sigma_delta_mod(u)
 % Implementation of a first-order sigmal delta modulator
 % Input 
-%   u     : upsampling rate
-%   s     : input signal
+%   u      : upsampling rate
+%   s      : input signal
 % Output
-%   s_sdm : reconstructed signal
-%   q     : qunatization error
+%   s_ds   : reconstructed signal
+%   q_ds   : qunatization error
 
+% su = resample(s,u,1);
 su = resample(s,u,1);
 d = 1;
 % delta signal
@@ -34,10 +35,10 @@ for n = 2:1:length(su)
 end
 
 % Decoder 
-s_sdm = resample(sigmaq,1,u);
+s_ds = resample(sigmaq,1,u);
 
 % Quantization Error
-q_sdm = s(:) - s_sdm(:);
+q_ds = s(:) - s_ds(:);
 
 % Simple moving average
 % B = 1/u*ones(u,1);
